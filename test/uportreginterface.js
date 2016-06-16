@@ -4,7 +4,6 @@ var Web3 = require('web3')
 var web3 = new Web3();
 var ipfs = require('ipfs-js')
 var pudding = require('ether-pudding')
-pudding.setWeb3(web3);
 var Promise = require('bluebird')
 var personaInfo = require('./persona_example.json')
 
@@ -16,8 +15,8 @@ ipfs.setProvider(ipfsProv);
 uportReg.setWeb3Provider(web3Prov)
 uportReg.setIpfsProvider(ipfsProv)
 
-var UportRegistry = require("../environments/development/contracts/UportRegistry.sol.js").load(pudding);
-UportRegistry = pudding.whisk({binary: UportRegistry.binary, abi: UportRegistry.abi})
+var UportRegistry = require("../environments/development/contracts/UportRegistry.sol.js");
+UportRegistry.setProvider(web3Prov);
 
 describe('Higher-level uportReg APIs', function () {
 
