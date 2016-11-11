@@ -43,7 +43,7 @@ function setAttributes(registryAddress, personaAddress, personaInfo, txData) {
     var buffer = new Buffer(json, "utf-8")
     ipfs.add(buffer, function(err, result) {
       if (err !== null) { reject(err); return; }
-      var ipfsHash = result[0].Hash;
+      var ipfsHash = result[0].hash;
       var ipfsHashHex = base58ToHex(ipfsHash);
       var reg = UportRegistry.at(registryAddress);
       reg.setAttributes(personaAddress, '0x' + ipfsHashHex, txData, function(err, tx) {
