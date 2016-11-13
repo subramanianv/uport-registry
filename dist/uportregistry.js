@@ -62,8 +62,10 @@ function getAttributes(registryAddress, personaAddress) {
     reg.getAttributes(personaAddress, function(err, ipfsHashHex) {
       if (err) {reject(err); return;}
       var ipfsHash = hexToBase58(ipfsHashHex.slice(2));
-      ipfs.cat(ipfsHash, function(err, personaObj) {
+      ipfs.cat(ipfsHash, {buffer : true}, function(err, personaObj) {
+
          if (err !==null) {reject(err); return};
+         personaObj = personaObj.toString();
          try {
             personaObj = JSON.parse(personaObj);
          }
